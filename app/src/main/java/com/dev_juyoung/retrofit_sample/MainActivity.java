@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.dev_juyoung.retrofit_sample.base.BaseActivity;
+import com.dev_juyoung.retrofit_sample.data.GithubData;
 import com.dev_juyoung.retrofit_sample.network.GithubService;
 import com.dev_juyoung.retrofit_sample.network.ServiceGenerator;
-import com.google.gson.JsonArray;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,19 +23,23 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Map<String, String> queries = new HashMap<>();
+        queries.put("q", "android");
+        queries.put("sort", "stars");
+
         GithubService service = ServiceGenerator.createService(GithubService.class);
 
-        Call<JsonArray> request = service.getUserRepositories("dev-juyoung");
-        request.enqueue(new Callback<JsonArray>() {
+        Call<GithubData> request = service.getMostStarsRepositories(queries);
+        request.enqueue(new Callback<GithubData>() {
             @Override
-            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+            public void onResponse(Call<GithubData> call, Response<GithubData> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "onResponse(): " + response.body().toString());
                 }
             }
 
             @Override
-            public void onFailure(Call<JsonArray> call, Throwable t) {
+            public void onFailure(Call<GithubData> call, Throwable t) {
                 Log.e(TAG, "onFailure(): " + t.getMessage());
             }
         });
