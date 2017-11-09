@@ -1,6 +1,6 @@
 package com.dev_juyoung.retrofit_sample.network;
 
-import com.dev_juyoung.retrofit_sample.data.SearchInfo;
+import com.dev_juyoung.retrofit_sample.data.store.SearchInfo;
 import com.google.gson.JsonArray;
 
 import java.util.Map;

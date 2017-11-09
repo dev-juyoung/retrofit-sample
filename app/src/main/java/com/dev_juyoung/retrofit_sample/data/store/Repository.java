@@ -1,4 +1,4 @@
-package com.dev_juyoung.retrofit_sample.data;
+package com.dev_juyoung.retrofit_sample.data.store;
 
 import com.google.gson.annotations.SerializedName;
 

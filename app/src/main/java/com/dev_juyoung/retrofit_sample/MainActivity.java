@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.dev_juyoung.retrofit_sample.base.BaseActivity;
-import com.dev_juyoung.retrofit_sample.data.SearchInfo;
+import com.dev_juyoung.retrofit_sample.data.store.SearchInfo;
 import com.dev_juyoung.retrofit_sample.network.GithubService;
 import com.dev_juyoung.retrofit_sample.network.ServiceGenerator;
 
