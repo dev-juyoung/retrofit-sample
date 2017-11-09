@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by juyounglee on 2017. 11. 9..
  */
 
-public class GithubData {
+public class SearchInfo {
     @SerializedName("total_count")
     private int totalCount;
     @SerializedName("incomplete_results")

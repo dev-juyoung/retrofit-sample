@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.dev_juyoung.retrofit_sample.base.BaseActivity;
-import com.dev_juyoung.retrofit_sample.data.GithubData;
+import com.dev_juyoung.retrofit_sample.data.SearchInfo;
 import com.dev_juyoung.retrofit_sample.network.GithubService;
 import com.dev_juyoung.retrofit_sample.network.ServiceGenerator;
 
@@ -29,17 +29,17 @@ public class MainActivity extends BaseActivity {
 
         GithubService service = ServiceGenerator.createService(GithubService.class);
 
-        Call<GithubData> request = service.getMostStarsRepositories(queries);
-        request.enqueue(new Callback<GithubData>() {
+        Call<SearchInfo> request = service.getMostStarsRepositories(queries);
+        request.enqueue(new Callback<SearchInfo>() {
             @Override
-            public void onResponse(Call<GithubData> call, Response<GithubData> response) {
+            public void onResponse(Call<SearchInfo> call, Response<SearchInfo> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "onResponse(): " + response.body().toString());
                 }
             }
 
             @Override
-            public void onFailure(Call<GithubData> call, Throwable t) {
+            public void onFailure(Call<SearchInfo> call, Throwable t) {
                 Log.e(TAG, "onFailure(): " + t.getMessage());
             }
         });

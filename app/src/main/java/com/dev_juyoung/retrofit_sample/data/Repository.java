@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Repository {
     @SerializedName("_id")
-    private String id;
+    private int id;
     @SerializedName("name")
     private String name;
     @SerializedName("full_name")
@@ -39,7 +39,7 @@ public class Repository {
         }
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

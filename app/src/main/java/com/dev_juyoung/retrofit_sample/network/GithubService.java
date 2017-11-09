@@ -1,6 +1,6 @@
 package com.dev_juyoung.retrofit_sample.network;
 
-import com.dev_juyoung.retrofit_sample.data.GithubData;
+import com.dev_juyoung.retrofit_sample.data.SearchInfo;
 import com.google.gson.JsonArray;
 
 import java.util.Map;
@@ -24,5 +24,5 @@ public interface GithubService {
      * @return
      */
     @GET("search/repositories")
-    Call<GithubData> getMostStarsRepositories(@QueryMap Map<String, String> queries);
+    Call<SearchInfo> getMostStarsRepositories(@QueryMap Map<String, String> queries);
 }
