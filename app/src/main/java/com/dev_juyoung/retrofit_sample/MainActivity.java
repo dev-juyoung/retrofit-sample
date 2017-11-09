@@ -5,13 +5,12 @@ import android.util.Log;
 
 import com.dev_juyoung.retrofit_sample.base.BaseActivity;
 import com.dev_juyoung.retrofit_sample.network.GithubService;
+import com.dev_juyoung.retrofit_sample.network.ServiceGenerator;
 import com.google.gson.JsonArray;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
@@ -21,14 +20,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Retrofit 통신 기본 사용법.
-        Retrofit retrofit =
-                new Retrofit.Builder()
-                        .baseUrl("https://api.github.com/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-        GithubService service = retrofit.create(GithubService.class);
+        GithubService service = ServiceGenerator.createService(GithubService.class);
 
         Call<JsonArray> request = service.getUserRepositories("dev-juyoung");
         request.enqueue(new Callback<JsonArray>() {
