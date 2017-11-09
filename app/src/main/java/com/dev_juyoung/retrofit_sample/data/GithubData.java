@@ -1,7 +1,6 @@
 package com.dev_juyoung.retrofit_sample.data;
 
-import android.util.Log;
-
+import com.dev_juyoung.retrofit_sample.data.listener.SearchCallback;
 import com.dev_juyoung.retrofit_sample.data.store.SearchInfo;
 import com.dev_juyoung.retrofit_sample.network.GithubService;
 import com.dev_juyoung.retrofit_sample.network.ServiceGenerator;
@@ -30,7 +29,7 @@ public class GithubData {
         return instance;
     }
 
-    public void getRepositories() {
+    public void getRepositories(final SearchCallback callback) {
         // 검색 시 사용할 queiry 생성.
         Map<String, String> quereis = new HashMap<>();
         quereis.put("q", "android");
@@ -45,13 +44,13 @@ public class GithubData {
             @Override
             public void onResponse(Call<SearchInfo> call, Response<SearchInfo> response) {
                 if (response.isSuccessful()) {
-                    Log.i(TAG, "onResponse(): " + response.body());
+                    callback.onSuccess(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<SearchInfo> call, Throwable t) {
-                Log.e(TAG, "onFailure(): " + t.getMessage());
+                callback.onFailure(t.getMessage());
             }
         });
     }
