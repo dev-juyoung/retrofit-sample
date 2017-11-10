@@ -13,12 +13,13 @@ import com.dev_juyoung.retrofit_sample.data.store.SearchInfo;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainContract.View {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.repoList)
     RecyclerView repoList;
 
+    private MainContract.Presenter mPresenter;
     private RepositoryAdapter mAdapter;
 
     @Override
@@ -26,7 +27,19 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setupPresenter();
         setupRecyclerView();
+    }
+
+    private void setupPresenter() {
+        mPresenter = new MainPresenter();
+        mPresenter.setView(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.removeView();
     }
 
     private void setupRecyclerView() {
