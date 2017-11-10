@@ -3,9 +3,11 @@ package com.dev_juyoung.retrofit_sample;
 import android.util.Log;
 
 import com.dev_juyoung.retrofit_sample.adapter.RepositoryContract;
-import com.dev_juyoung.retrofit_sample.data.GithubData;
-import com.dev_juyoung.retrofit_sample.data.listener.SearchCallback;
-import com.dev_juyoung.retrofit_sample.data.store.SearchInfo;
+import com.dev_juyoung.retrofit_sample.data.source.GithubDataSource;
+import com.dev_juyoung.retrofit_sample.data.source.GithubRepository;
+import com.dev_juyoung.retrofit_sample.data.store.Repository;
+
+import java.util.ArrayList;
 
 /**
  * Created by juyounglee on 2017. 11. 10..
@@ -17,7 +19,7 @@ public class MainPresenter implements MainContract.Presenter {
     private MainContract.View view;
     private RepositoryContract.View adapterView;
     private RepositoryContract.Model adapterModel;
-    private GithubData model;
+    private GithubRepository model;
 
     @Override
     public void setView(MainContract.View view) {
@@ -44,7 +46,7 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void setModel(GithubData model) {
+    public void setModel(GithubRepository model) {
         Log.i(TAG, "Presenter: 해당 Presenter에서 사용할 Model 설정 이벤트 발생.");
         this.model = model;
     }
@@ -53,14 +55,14 @@ public class MainPresenter implements MainContract.Presenter {
     public void requestData(final boolean isUpdate) {
         Log.i(TAG, "Presenter: 사용자로 부터 데이터 요청 이벤트 발생.");
 
-        model.getRepositories(new SearchCallback() {
+        model.searchData(new GithubDataSource.SearchDataCallback() {
             @Override
-            public void onSuccess(SearchInfo items) {
+            public void onSuccess(ArrayList<Repository> items) {
                 // 업데이트 유무에 따른 AdapterModel에 이벤트 전달.
                 if (!isUpdate) {
-                    adapterModel.addItems(items.getRepositories());
+                    adapterModel.addItems(items);
                 } else {
-                    adapterModel.updateItems(items.getRepositories());
+                    adapterModel.updateItems(items);
                 }
             }
 

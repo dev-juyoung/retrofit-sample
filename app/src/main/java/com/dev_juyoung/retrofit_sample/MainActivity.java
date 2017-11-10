@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.dev_juyoung.retrofit_sample.adapter.RepositoryAdapter;
 import com.dev_juyoung.retrofit_sample.base.BaseActivity;
-import com.dev_juyoung.retrofit_sample.data.GithubData;
+import com.dev_juyoung.retrofit_sample.data.source.GithubRepository;
 
 import butterknife.BindView;
 
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mPresenter.setAdapterModel(mAdapter);
 
         // Presenter에서 사용될 Model 세팅.
-        mPresenter.setModel(GithubData.getInstance());
+        mPresenter.setModel(GithubRepository.getInstance());
     }
 
     @Override
