@@ -1,7 +1,7 @@
 Android Retrofit Sample
 ==================
 
-해당 Repository는 Android에서 REST API 통신을 위한 `Retrofit` Library 사용에 대한 Sample을 작성한 Repository 입니다.
+해당 Repository는 Android에서 REST API 통신을 조금 더 편리하게 사용하기 위해 유명한 `Retrofit` Library의 사용법에 대해 Sample을 작성한 Repository 입니다.
 [Retrofit 공식페이지][retrofit]에도 언급된 `Github API`의 `Repository 검색 API`를 이용하여 `android`라는 키워드를 이용하여 `star`가 높은 순으로 sorting되도록 예제를 작성하였습니다.
 
 References
