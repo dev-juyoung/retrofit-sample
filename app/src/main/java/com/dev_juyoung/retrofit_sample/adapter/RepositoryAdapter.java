@@ -21,7 +21,7 @@ import butterknife.BindView;
  * Created by juyounglee on 2017. 11. 9..
  */
 
-public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> {
+public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> implements RepositoryContract.View, RepositoryContract.Model {
     private Context mContext;
     private ArrayList<Repository> items;
 
@@ -29,17 +29,22 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
         this.mContext = mContext;
     }
 
+    @Override
     public void addItems(ArrayList<Repository> items) {
         if (this.items == null) {
             this.items = new ArrayList<>();
         }
 
         this.items.addAll(items);
-        notifyDataSetChanged();
     }
 
+    @Override
     public void updateItems(ArrayList<Repository> items) {
         this.items = items;
+    }
+
+    @Override
+    public void updateView() {
         notifyDataSetChanged();
     }
 

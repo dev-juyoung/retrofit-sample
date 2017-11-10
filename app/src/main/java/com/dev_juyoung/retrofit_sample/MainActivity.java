@@ -3,13 +3,11 @@ package com.dev_juyoung.retrofit_sample;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.dev_juyoung.retrofit_sample.adapter.RepositoryAdapter;
 import com.dev_juyoung.retrofit_sample.base.BaseActivity;
 import com.dev_juyoung.retrofit_sample.data.GithubData;
-import com.dev_juyoung.retrofit_sample.data.listener.SearchCallback;
-import com.dev_juyoung.retrofit_sample.data.store.SearchInfo;
 
 import butterknife.BindView;
 
@@ -32,8 +30,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void setupPresenter() {
+        // Presenter 생성 및 View 세팅.
         mPresenter = new MainPresenter();
         mPresenter.setView(this);
+
+        // Adapter 생성 및 Presenter에 사용될 AdapterView / AdapterModel 세팅.
+        mAdapter = new RepositoryAdapter(this);
+        mPresenter.setAdapterView(mAdapter);
+        mPresenter.setAdapterModel(mAdapter);
+
+        // Presenter에서 사용될 Model 세팅.
+        mPresenter.setModel(GithubData.getInstance());
     }
 
     @Override
@@ -43,29 +50,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void setupRecyclerView() {
-        mAdapter = new RepositoryAdapter(this);
         repoList.setHasFixedSize(true);
         repoList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         repoList.setAdapter(mAdapter);
 
-        requestData(false);
+        // Presenter로 데이터 요청 이벤트 전달.
+        mPresenter.requestData(false);
     }
 
-    private void requestData(final boolean isUpdate) {
-        GithubData.getInstance().getRepositories(new SearchCallback() {
-            @Override
-            public void onSuccess(SearchInfo items) {
-                if (!isUpdate) {
-                    mAdapter.addItems(items.getRepositories());
-                } else {
-                    mAdapter.updateItems(items.getRepositories());
-                }
-            }
-
-            @Override
-            public void onFailure(String message) {
-                Log.e(TAG, "failed: " + message);
-            }
-        });
+    @Override
+    public void showErrorMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 
 public class RepositoryContract {
-    interface View {
+    public interface View {
         void updateView();
     }
 
-    interface Model {
+    public interface Model {
         void addItems(ArrayList<Repository> items);
         void updateItems(ArrayList<Repository> items);
     }
