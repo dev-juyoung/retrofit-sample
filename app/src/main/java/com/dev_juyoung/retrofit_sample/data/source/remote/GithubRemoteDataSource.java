@@ -1,5 +1,7 @@
 package com.dev_juyoung.retrofit_sample.data.source.remote;
 
+import android.util.Log;
+
 import com.dev_juyoung.retrofit_sample.data.source.GithubDataSource;
 import com.dev_juyoung.retrofit_sample.data.store.SearchInfo;
 import com.dev_juyoung.retrofit_sample.network.GithubService;
@@ -17,6 +19,8 @@ import retrofit2.Response;
  */
 
 public class GithubRemoteDataSource implements GithubDataSource {
+    private static final String TAG = "RemoteSource";
+
     private static GithubRemoteDataSource instance;
 
     public static GithubRemoteDataSource getInstance() {
@@ -29,6 +33,8 @@ public class GithubRemoteDataSource implements GithubDataSource {
 
     @Override
     public void searchData(final SearchDataCallback callback) {
+        Log.i(TAG, "Model(Remote): Remote 저장소로 데이터 요청.");
+
         // 검색 시 사용할 queiry 생성.
         Map<String, String> quereis = new HashMap<>();
         quereis.put("q", "android");

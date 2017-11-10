@@ -2,6 +2,7 @@ package com.dev_juyoung.retrofit_sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import butterknife.BindView;
  */
 
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> implements RepositoryContract.View, RepositoryContract.Model {
+    private static final String TAG = "RepositoryAdapter";
+
     private Context mContext;
     private ArrayList<Repository> items;
 
@@ -31,6 +34,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     @Override
     public void addItems(ArrayList<Repository> items) {
+        Log.i(TAG, "AdapterModel: Presenter로 부터 데이터 추가 이벤트 전달.");
+
         if (this.items == null) {
             this.items = new ArrayList<>();
         }
@@ -40,11 +45,15 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     @Override
     public void updateItems(ArrayList<Repository> items) {
+        Log.i(TAG, "AdapterModel: Presenter로 부터 데이터 갱신 이벤트 전달.");
+
         this.items = items;
     }
 
     @Override
     public void updateView() {
+        Log.i(TAG, "AdapterView: Presenter로 부터 화면 갱신 이벤트 전달.");
+
         notifyDataSetChanged();
     }
 

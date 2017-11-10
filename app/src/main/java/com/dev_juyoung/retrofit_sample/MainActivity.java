@@ -3,6 +3,7 @@ package com.dev_juyoung.retrofit_sample;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.dev_juyoung.retrofit_sample.adapter.RepositoryAdapter;
@@ -60,6 +61,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void showErrorMessage(String message) {
+        Log.i(TAG, "View: Presenter로 부터 ErrorMessage 표출 이벤트 발생.");
+
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

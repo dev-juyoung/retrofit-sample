@@ -64,6 +64,9 @@ public class MainPresenter implements MainContract.Presenter {
                 } else {
                     adapterModel.updateItems(items);
                 }
+
+                // AdapterModel에 데이터 전달 후, AdapterView에 갱신 이벤트 전달.
+                adapterView.updateView();
             }
 
             @Override
